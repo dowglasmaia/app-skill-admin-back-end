@@ -1,11 +1,11 @@
-package maia.com.job.skills.domain.skill.dto;
+package maia.com.job.skills.domain.colaborador.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import maia.com.job.skills.domain.colaborador.dto.ColaboradorResponse;
+import maia.com.job.skills.domain.skill.dto.SkillResponse;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,9 +17,15 @@ import static com.fasterxml.jackson.annotation.JsonInclude.*;
 @AllArgsConstructor
 @Builder
 @JsonInclude(Include.NON_NULL)
-public class SkillResponse {
+public class ColaboradorResponse {
+
     private Long id;
     private String name;
-    private String descripton;
-    private Set<ColaboradorResponse> colaboradores = new HashSet<>();
+    private String email;
+    private String matricula;
+    private String cargo;
+    private String squard;
+    private Set<SkillResponse> skills = new HashSet<>();
+
+
 }

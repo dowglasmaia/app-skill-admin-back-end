@@ -1,18 +1,19 @@
 package maia.com.job.skills.domain.skill;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import maia.com.job.skills.domain.colaborador.ColaboradorEntity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table
+@Table(name = "skill")
 public class SkillEntity {
 
     @Id
@@ -20,4 +21,12 @@ public class SkillEntity {
     private Long id;
     private String name;
     private String descripton;
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "colaborador_skill",
+            joinColumns = @JoinColumn(name = "skill_id"),
+            inverseJoinColumns = @JoinColumn(name = "colaborador_id"))
+    private Set<ColaboradorEntity> colaboradores = new HashSet<>();
 }

@@ -19,7 +19,7 @@ public class SkillController {
     private SkillService skillService;
 
     @GetMapping
-    public ResponseEntity<List<SkillResponse>> getSkills() {
+    public ResponseEntity<List<SkillResponse>> getAll() {
         var response = skillService.getAll();
         return ResponseEntity.ok(response);
     }
