@@ -1,4 +1,4 @@
-package maia.com.job.skills.domain.dto;
+package maia.com.job.skills.domain.skill.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,6 +1,7 @@
 package maia.com.job.skills.services.impl;
 
-import maia.com.job.skills.domain.dto.SkillResponse;
+import maia.com.job.skills.domain.skill.dto.SkillRequest;
+import maia.com.job.skills.domain.skill.dto.SkillResponse;
 import maia.com.job.skills.repositories.SkillRepository;
 import maia.com.job.skills.services.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
-    public void create(SkillResponse skill) {
+    public void create(SkillRequest skill) {
         var entity = from(skill);
         repository.save(entity);
     }

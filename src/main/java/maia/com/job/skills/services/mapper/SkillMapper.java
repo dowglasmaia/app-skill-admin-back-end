@@ -1,7 +1,8 @@
 package maia.com.job.skills.services.mapper;
 
-import maia.com.job.skills.domain.SkillEntity;
-import maia.com.job.skills.domain.dto.SkillResponse;
+import maia.com.job.skills.domain.skill.SkillEntity;
+import maia.com.job.skills.domain.skill.dto.SkillRequest;
+import maia.com.job.skills.domain.skill.dto.SkillResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class SkillMapper {
         return responseList;
     }
 
-    public static SkillEntity from(SkillResponse skill) {
+    public static SkillEntity from(SkillRequest skill) {
         return SkillEntity.builder()
                 .name(skill.getName())
                 .descripton(skill.getDescripton())
