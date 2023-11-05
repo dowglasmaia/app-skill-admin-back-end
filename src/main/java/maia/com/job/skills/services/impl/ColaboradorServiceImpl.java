@@ -4,33 +4,48 @@ import maia.com.job.skills.domain.colaborador.dto.ColaboradorResponse;
 import maia.com.job.skills.exptions.NotFoundExptionCustomer;
 import maia.com.job.skills.repositories.ColaboradorRepository;
 import maia.com.job.skills.services.ColaboradorService;
-import maia.com.job.skills.services.mapper.ColaboradorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
-import static maia.com.job.skills.services.mapper.ColaboradorMapper.*;
+import static java.util.Objects.isNull;
+import static maia.com.job.skills.services.mapper.ColaboradorMapper.to;
+import static maia.com.job.skills.services.mapper.ColaboradorMapper.toList;
 
 @Service
 public class ColaboradorServiceImpl implements ColaboradorService {
 
     @Autowired
-    private ColaboradorRepository colaboradorRepository;
+    private ColaboradorRepository repository;
 
     @Override
     public ColaboradorResponse getById(Long id) {
-        var entity = colaboradorRepository.findById(id)
+        var entity = repository.findById(id)
                 .orElseThrow(() -> new NotFoundExptionCustomer("Colaborador não encontrado"));
 
-        var r =   to(entity);
-
-        return r;
+        return to(entity);
 
     }
 
     @Override
-    public List<ColaboradorResponse> getBySkill(Long idSkill) {
-        return null;
+    public Set<ColaboradorResponse> getAllBySkill(Long idSkill) {
+        if (isNull(idSkill) || idSkill == 0) {
+            return this.getAll();
+        }
+
+        return this.getAll(idSkill);
     }
+
+    private Set<ColaboradorResponse> getAll(Long idSkill) {
+        var listEntiry = repository.findBySkills_Id(idSkill);
+        return toList(listEntiry);
+    }
+
+    private Set<ColaboradorResponse> getAll() {
+        var listEntiry = repository.findAll();
+        return toList(listEntiry);
+    }
+
 }

@@ -4,15 +4,16 @@ import maia.com.job.skills.domain.skill.SkillEntity;
 import maia.com.job.skills.domain.skill.dto.SkillRequest;
 import maia.com.job.skills.domain.skill.dto.SkillResponse;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SkillMapper {
     private SkillMapper() {
     }
 
-    public static List<SkillResponse> to(List<SkillEntity> entities) {
-        List<SkillResponse> responseList = new ArrayList<>();
+    public static Set<SkillResponse> to(List<SkillEntity> entities) {
+        Set<SkillResponse> responseList = new HashSet<>();
         entities.forEach(
                 entity ->
                         responseList.add(
@@ -26,7 +27,7 @@ public class SkillMapper {
         return responseList;
     }
 
-    public static SkillResponse to( SkillEntity entity) {
+    public static SkillResponse to(SkillEntity entity) {
         return SkillResponse.builder()
                 .id(entity.getId())
                 .name(entity.getName())

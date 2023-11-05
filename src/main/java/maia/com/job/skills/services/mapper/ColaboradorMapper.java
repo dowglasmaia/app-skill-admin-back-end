@@ -6,6 +6,7 @@ import maia.com.job.skills.domain.skill.SkillEntity;
 import maia.com.job.skills.domain.skill.dto.SkillResponse;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ColaboradorMapper {
@@ -13,7 +14,7 @@ public class ColaboradorMapper {
     }
 
     public static ColaboradorResponse to(ColaboradorEntity entity) {
-        var response = ColaboradorResponse.builder()
+        return ColaboradorResponse.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .cargo(entity.getCargo())
@@ -22,23 +23,38 @@ public class ColaboradorMapper {
                 .squard(entity.getSquard())
                 .skills(toListSkill(entity.getSkills()))
                 .build();
+    }
 
+    public static Set<ColaboradorResponse> toList(List<ColaboradorEntity> entities) {
+        Set<ColaboradorResponse> colaboradores = new HashSet<>();
+        entities.forEach(
+                entity ->
+                        colaboradores.add(ColaboradorResponse.builder()
+                                .id(entity.getId())
+                                .name(entity.getName())
+                                .cargo(entity.getCargo())
+                                .email(entity.getEmail())
+                                .matricula(entity.getMatricula())
+                                .squard(entity.getSquard())
+                                .skills(toListSkill(entity.getSkills()))
+                                .build()
+                        )
+        );
 
-        return response;
+        return colaboradores;
     }
 
     private static Set<SkillResponse> toListSkill(Set<SkillEntity> entities) {
-        Set<SkillResponse> list = new HashSet<>();
+        Set<SkillResponse> skills = new HashSet<>();
         entities.forEach(
                 skill ->
-                        list.add(SkillResponse.builder()
+                        skills.add(SkillResponse.builder()
                                 .id(skill.getId())
                                 .name(skill.getName())
                                 .descripton(skill.getDescripton())
                                 .build())
         );
-
-        return list;
+        return skills;
     }
 
 }

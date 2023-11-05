@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 import static maia.com.job.skills.services.mapper.SkillMapper.from;
 import static maia.com.job.skills.services.mapper.SkillMapper.to;
@@ -21,7 +22,7 @@ public class SkillServiceImpl implements SkillService {
     private SkillRepository repository;
 
     @Override
-    public List<SkillResponse> getAll() {
+    public Set<SkillResponse> getAll() {
         var skills = repository.findAll();
         return to(skills);
     }

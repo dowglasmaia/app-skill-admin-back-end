@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping(value = "/api/v1/colaboradores")
 public class ColaboradorController {
@@ -19,6 +21,13 @@ public class ColaboradorController {
     @GetMapping("/{id}")
     public ResponseEntity<ColaboradorResponse> getById(@PathVariable Long id) {
         var response = colaboradorService.getById(id);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/skill/{id}")
+    public ResponseEntity<Set<ColaboradorResponse>> getAllByIdSkill(@PathVariable Long id) {
+        var response = colaboradorService.getAllBySkill(id);
 
         return ResponseEntity.ok(response);
     }

@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/v1/skills")
@@ -19,7 +19,7 @@ public class SkillController {
     private SkillService skillService;
 
     @GetMapping
-    public ResponseEntity<List<SkillResponse>> getAll() {
+    public ResponseEntity<Set<SkillResponse>> getAll() {
         var response = skillService.getAll();
         return ResponseEntity.ok(response);
     }
