@@ -23,10 +23,6 @@ public class SkillEntity {
     private String descripton;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "colaborador_skill",
-            joinColumns = @JoinColumn(name = "skill_id"),
-            inverseJoinColumns = @JoinColumn(name = "colaborador_id"))
+    @ManyToMany(mappedBy = "skills",  fetch = FetchType.LAZY)
     private Set<ColaboradorEntity> colaboradores = new HashSet<>();
 }

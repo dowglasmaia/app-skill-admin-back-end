@@ -24,6 +24,23 @@ public class SkillMapper {
                                         .build()
                         )
         );
+
+        return responseList;
+    }
+
+    public static Set<SkillEntity> toSkillEntity(Set<SkillResponse> entities) {
+        Set<SkillEntity> responseList = new HashSet<>();
+        entities.forEach(
+                entity ->
+                        responseList.add(
+                                SkillEntity.builder()
+                                        .id(entity.getId())
+                                        .name(entity.getName())
+                                        .descripton(entity.getDescripton())
+                                        .build()
+                        )
+        );
+
         return responseList;
     }
 

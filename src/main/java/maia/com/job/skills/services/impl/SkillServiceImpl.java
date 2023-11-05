@@ -9,7 +9,6 @@ import maia.com.job.skills.services.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 
 import static maia.com.job.skills.services.mapper.SkillMapper.from;

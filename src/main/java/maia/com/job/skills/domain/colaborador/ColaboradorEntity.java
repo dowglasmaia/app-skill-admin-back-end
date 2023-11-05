@@ -25,7 +25,12 @@ public class ColaboradorEntity {
     private String cargo;
     private String squard;
 
-    @ManyToMany(mappedBy = "colaboradores",  fetch = FetchType.LAZY)
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "colaborador_skill",
+            joinColumns = @JoinColumn(name = "colaborador_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id"))
     private Set<SkillEntity> skills = new HashSet<>();
 
 }
