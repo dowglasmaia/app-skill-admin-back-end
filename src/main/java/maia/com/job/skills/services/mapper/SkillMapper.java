@@ -26,10 +26,20 @@ public class SkillMapper {
         return responseList;
     }
 
+    public static SkillResponse to( SkillEntity entity) {
+        return SkillResponse.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .descripton(entity.getDescripton())
+                .build();
+    }
+
     public static SkillEntity from(SkillRequest skill) {
         return SkillEntity.builder()
                 .name(skill.getName())
                 .descripton(skill.getDescripton())
                 .build();
     }
+
+
 }
