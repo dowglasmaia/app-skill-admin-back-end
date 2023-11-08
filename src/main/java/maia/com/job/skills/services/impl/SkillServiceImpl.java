@@ -38,10 +38,17 @@ public class SkillServiceImpl implements SkillService {
                 () -> new NotFoundExptionCustomer("Skill não encontrada"));
 
         entity.setName(request.getName());
-        entity.setDescripton(request.getDescripton());
+        entity.setDescription(request.getDescription());
 
         var entityUpdated = repository.save(entity);
         return to(entityUpdated);
+    }
+
+    @Override
+    public SkillResponse getById(Long id) {
+        var entity = repository.findById(id).orElseThrow(
+                () -> new NotFoundExptionCustomer("Skill não encontrada"));
+        return to(entity);
     }
 
 

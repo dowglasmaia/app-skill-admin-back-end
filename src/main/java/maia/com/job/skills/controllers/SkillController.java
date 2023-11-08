@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+
 @RestController
 @RequestMapping(value = "/api/v1/skills")
 public class SkillController {
@@ -24,14 +25,21 @@ public class SkillController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<SkillResponse> getById(@PathVariable Long id) {
+        var response = skillService.getById(id);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody SkillRequest request) {
         skillService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping
-    public ResponseEntity<SkillResponse> update(@RequestBody SkillRequestUpdate request) {
+    @PutMapping("/{id}")
+    public ResponseEntity<SkillResponse> update(@PathVariable Long id,
+                                                @RequestBody SkillRequestUpdate request) {
         var response = skillService.update(request);
         return ResponseEntity.ok(response);
     }

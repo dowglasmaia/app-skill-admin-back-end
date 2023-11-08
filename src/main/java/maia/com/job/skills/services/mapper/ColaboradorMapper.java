@@ -51,7 +51,7 @@ public class ColaboradorMapper {
                         skills.add(SkillResponse.builder()
                                 .id(skill.getId())
                                 .name(skill.getName())
-                                .descripton(skill.getDescripton())
+                                .description(skill.getDescription())
                                 .build())
         );
         return skills;

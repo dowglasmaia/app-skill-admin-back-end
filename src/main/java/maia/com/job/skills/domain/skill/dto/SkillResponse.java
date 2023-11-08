@@ -20,6 +20,6 @@ import static com.fasterxml.jackson.annotation.JsonInclude.*;
 public class SkillResponse {
     private Long id;
     private String name;
-    private String descripton;
+    private String description;
     private Set<ColaboradorResponse> colaboradores = new HashSet<>();
 }

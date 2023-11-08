@@ -14,4 +14,6 @@ public interface SkillService {
     void create(SkillRequest skill);
 
     SkillResponse update(SkillRequestUpdate request);
+
+    SkillResponse getById(Long id);
 }

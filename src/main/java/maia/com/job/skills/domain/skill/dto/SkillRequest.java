@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class SkillRequest {
 
     private String name;
-    private String descripton;
+    private String description;
 }

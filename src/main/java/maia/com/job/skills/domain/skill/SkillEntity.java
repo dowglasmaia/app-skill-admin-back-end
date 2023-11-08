@@ -20,7 +20,7 @@ public class SkillEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String descripton;
+    private String description;
 
 
     @ManyToMany(mappedBy = "skills",  fetch = FetchType.LAZY)

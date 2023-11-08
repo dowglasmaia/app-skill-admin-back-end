@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ColaboradorRepository extends JpaRepository<ColaboradorEntity, Long> {
 
-    List<ColaboradorEntity> findBySkills_Id(Long idSkill);
+    List<ColaboradorEntity> findBySkills_NameContainingIgnoreCase(String nameSkill);
 }

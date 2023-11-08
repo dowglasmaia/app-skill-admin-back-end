@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static java.util.Objects.isNull;
@@ -32,13 +33,14 @@ public class ColaboradorServiceImpl implements ColaboradorService {
 
     }
 
-    @Override
-    public Set<ColaboradorResponse> getAllBySkill(Long idSkill) {
-        if (isNull(idSkill) || idSkill == 0) {
-            return this.getAll();
-        }
 
-        return this.getAll(idSkill);
+
+    @Override
+    public Set<ColaboradorResponse> getAll(String nameSkill) {
+        if(Objects.nonNull(nameSkill) && !nameSkill.isEmpty() ){
+           return   toList(repository.findBySkills_NameContainingIgnoreCase(nameSkill));
+        }
+        return toList(repository.findAll());
     }
 
     @Override
@@ -53,16 +55,6 @@ public class ColaboradorServiceImpl implements ColaboradorService {
         var colaboradorUpdated = repository.save(colaboradorEntity);
 
         return to(colaboradorUpdated);
-    }
-
-    private Set<ColaboradorResponse> getAll(Long idSkill) {
-        var listEntiry = repository.findBySkills_Id(idSkill);
-        return toList(listEntiry);
-    }
-
-    private Set<ColaboradorResponse> getAll() {
-        var listEntiry = repository.findAll();
-        return toList(listEntiry);
     }
 
 }

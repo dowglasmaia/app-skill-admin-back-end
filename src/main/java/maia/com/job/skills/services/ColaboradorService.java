@@ -10,7 +10,8 @@ public interface ColaboradorService {
 
     ColaboradorResponse getById(Long id);
 
-    Set<ColaboradorResponse> getAllBySkill(Long idSkill);
 
     public ColaboradorResponse addSkillInColaborador(List<SkillResponse> skills, Long idColaborador);
+
+    Set<ColaboradorResponse> getAll(String nameSkill);
 }

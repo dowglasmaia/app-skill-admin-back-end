@@ -20,7 +20,7 @@ public class SkillMapper {
                                 SkillResponse.builder()
                                         .id(entity.getId())
                                         .name(entity.getName())
-                                        .descripton(entity.getDescripton())
+                                        .description(entity.getDescription())
                                         .build()
                         )
         );
@@ -36,7 +36,7 @@ public class SkillMapper {
                                 SkillEntity.builder()
                                         .id(entity.getId())
                                         .name(entity.getName())
-                                        .descripton(entity.getDescripton())
+                                        .description(entity.getDescription())
                                         .build()
                         )
         );
@@ -48,14 +48,14 @@ public class SkillMapper {
         return SkillResponse.builder()
                 .id(entity.getId())
                 .name(entity.getName())
-                .descripton(entity.getDescripton())
+                .description(entity.getDescription())
                 .build();
     }
 
     public static SkillEntity from(SkillRequest skill) {
         return SkillEntity.builder()
                 .name(skill.getName())
-                .descripton(skill.getDescripton())
+                .description(skill.getDescription())
                 .build();
     }
 
