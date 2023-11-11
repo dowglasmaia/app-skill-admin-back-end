@@ -2,6 +2,7 @@ package maia.com.job.skills.services.mapper;
 
 import maia.com.job.skills.domain.skill.SkillEntity;
 import maia.com.job.skills.domain.skill.dto.SkillRequest;
+import maia.com.job.skills.domain.skill.dto.SkillRequestUpdate;
 import maia.com.job.skills.domain.skill.dto.SkillResponse;
 
 import java.util.HashSet;
@@ -28,7 +29,7 @@ public class SkillMapper {
         return responseList;
     }
 
-    public static Set<SkillEntity> toSkillEntity(Set<SkillResponse> entities) {
+    public static Set<SkillEntity> toSkillEntity(Set<SkillRequestUpdate> entities) {
         Set<SkillEntity> responseList = new HashSet<>();
         entities.forEach(
                 entity ->

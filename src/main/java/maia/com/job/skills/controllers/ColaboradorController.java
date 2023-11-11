@@ -1,6 +1,7 @@
 package maia.com.job.skills.controllers;
 
 import maia.com.job.skills.domain.colaborador.dto.ColaboradorResponse;
+import maia.com.job.skills.domain.skill.dto.SkillRequestUpdate;
 import maia.com.job.skills.domain.skill.dto.SkillResponse;
 import maia.com.job.skills.services.ColaboradorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ColaboradorController {
     }
 
     @PutMapping("/{id}/skills")
-    public ResponseEntity<ColaboradorResponse> addJobSkill(@PathVariable Long id, @RequestBody List<SkillResponse> skills) {
+    public ResponseEntity<ColaboradorResponse> addJobSkill(@PathVariable Long id, @RequestBody List<SkillRequestUpdate> skills) {
         var response = colaboradorService.addSkillInColaborador(skills, id);
         return ResponseEntity.ok(response);
     }

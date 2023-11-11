@@ -1,6 +1,7 @@
 package maia.com.job.skills.services.impl;
 
 import maia.com.job.skills.domain.colaborador.dto.ColaboradorResponse;
+import maia.com.job.skills.domain.skill.dto.SkillRequestUpdate;
 import maia.com.job.skills.domain.skill.dto.SkillResponse;
 import maia.com.job.skills.exptions.NotFoundExptionCustomer;
 import maia.com.job.skills.repositories.ColaboradorRepository;
@@ -44,7 +45,7 @@ public class ColaboradorServiceImpl implements ColaboradorService {
     }
 
     @Override
-    public ColaboradorResponse addSkillInColaborador(List<SkillResponse> skills, Long idColaborador) {
+    public ColaboradorResponse addSkillInColaborador(List<SkillRequestUpdate> skills, Long idColaborador) {
 
         var colaboradorEntity = repository.findById(idColaborador).get();
 
