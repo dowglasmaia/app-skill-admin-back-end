@@ -71,14 +71,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _guard_auth_guard_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./guard/auth-guard.service */ "./src/app/guard/auth-guard.service.ts");
+/* harmony import */ var _guard_login_guard_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./guard/login-guard.service */ "./src/app/guard/login-guard.service.ts");
+
+
 
 
 
 var routes = [
-    { path: '', loadChildren: './pages/dashboard/dashboard.module#DashboardModule' },
-    { path: 'skills', loadChildren: './pages/skills/skills.module#SkillsModule' },
-    { path: 'profile', loadChildren: './pages/user/user.module#UserModule' },
-    { path: 'login', loadChildren: './pages/login/login.module#LoginModule' },
+    {
+        path: '', canActivate: [_guard_auth_guard_service__WEBPACK_IMPORTED_MODULE_3__["AuthGuardService"]],
+        children: [
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+            { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule' },
+            { path: 'skills', loadChildren: './pages/skills/skills.module#SkillsModule' },
+            { path: 'profile', loadChildren: './pages/user/user.module#UserModule' },
+        ],
+    },
+    { path: 'login', loadChildren: './pages/login/login.module#LoginModule', canActivate: [_guard_login_guard_service__WEBPACK_IMPORTED_MODULE_4__["LoginGuard"]] },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -167,6 +177,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
+/* harmony import */ var _guard_auth_guard_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./guard/auth-guard.service */ "./src/app/guard/auth-guard.service.ts");
+/* harmony import */ var _guard_login_guard_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./guard/login-guard.service */ "./src/app/guard/login-guard.service.ts");
+
+
 
 
 
@@ -189,7 +203,10 @@ var AppModule = /** @class */ (function () {
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
             ],
-            providers: [],
+            providers: [
+                _guard_auth_guard_service__WEBPACK_IMPORTED_MODULE_7__["AuthGuardService"],
+                _guard_login_guard_service__WEBPACK_IMPORTED_MODULE_8__["LoginGuard"]
+            ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]],
             schemas: [
                 _angular_core__WEBPACK_IMPORTED_MODULE_2__["CUSTOM_ELEMENTS_SCHEMA"]
@@ -221,7 +238,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"userLogado\" class=\"wrapper\">\r\n  <header class=\"main-header\">\r\n    <!-- Logo -->\r\n    <a routerLink=\"/\" class=\"logo\">\r\n      <!-- mini logo for sidebar mini 50x50 pixels -->\r\n      <span class=\"logo-mini\"><b>Skills</b></span>\r\n      <!-- logo for regular state and mobile devices -->\r\n      <span class=\"logo-lg\">\r\n        <b>Job Skills</b>\r\n      </span>\r\n    </a>\r\n\r\n    <!-- Header Navbar -->\r\n    <nav class=\"navbar navbar-static-top justify-content-start\" role=\"navigation\">\r\n      <a href=\"#\" class=\"sidebar-toggle\" data-toggle=\"push-menu\" role=\"button\">\r\n        <span class=\"sr-only\">Toggle navigation</span>\r\n      </a>\r\n\r\n    </nav>\r\n  </header>\r\n\r\n  <!-- Coluna Esquerda do sidebar -  com Menu de Navegação -->\r\n  <aside class=\"main-sidebar\">\r\n    <!-- Sidebar Menu -->\r\n    <section class=\"sidebar\">\r\n      <ul class=\"sidebar-menu\" data-widget=\"tree\">\r\n        <li class=\"header\" style=\"text-align: center !important; padding: 15px 0 !important\">\r\n          <a class=\"nav-link \" routerLink=\"/\"> Dashboard </a>\r\n        </li>\r\n\r\n        <li class=\"nav-item\" routerLinkActive=\"active\">\r\n          <a class=\"nav-link \" routerLink=\"/skills\">\r\n            <svg class=\"mr-2\" xmlns=\"http://www.w3.org/2000/svg\" height=\"1em\"\r\n              viewBox=\"0 0 640 512\"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->\r\n              <path\r\n                d=\"M256 64H384v64H256V64zM240 0c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48h48v32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96v32H80c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48H240c26.5 0 48-21.5 48-48V368c0-26.5-21.5-48-48-48H192V288H448v32H400c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48H560c26.5 0 48-21.5 48-48V368c0-26.5-21.5-48-48-48H512V288h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H352V192h48c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H240zM96 448V384H224v64H96zm320-64H544v64H416V384z\" />\r\n            </svg>\r\n            Skills\r\n          </a>\r\n        </li>\r\n\r\n      </ul>\r\n\r\n    </section>\r\n\r\n    <section style=\"\r\n    position: absolute;\r\n    width: 100%;\r\n    bottom: 10px \">\r\n\r\n      <ul class=\"sidebar-menu\" data-widget=\"tree\">\r\n        <li class=\"nav-item\" routerLinkActive=\"active\">\r\n          <a class=\"nav-link \" (click)=\"logout()\" style=\"cursor: pointer; color:white;\">\r\n            <svg class=\"mr-2\" xmlns=\"http://www.w3.org/2000/svg\" height=\"1em\"\r\n              viewBox=\"0 0 512 512\"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->\r\n              <path\r\n                d=\"M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z\" />\r\n            </svg>\r\n            Sair\r\n          </a>\r\n        </li>\r\n      </ul>\r\n\r\n    </section>\r\n\r\n  </aside>\r\n\r\n  <!-- Main content -->\r\n  <div class=\"content-wrapper\">\r\n    <section class=\"content container-fluid\">\r\n\r\n      <router-outlet></router-outlet>\r\n\r\n    </section>\r\n  </div>\r\n\r\n  <!-- Main Footer -->\r\n  <footer class=\"main-footer\">\r\n    <div class=\"pull-right hidden-xs\"> Desenvolvimento: <strong>Dowglas Maia</strong> </div>\r\n    <strong>&copy; 2023 | </strong> Todos os direitos reservados.\r\n  </footer>\r\n\r\n</div>\r\n\r\n\r\n<div *ngIf=\"!userLogado\">\r\n\r\n  <section class=\"content container-fluid\">\r\n\r\n    <router-outlet></router-outlet>\r\n\r\n  </section>\r\n\r\n</div>"
+module.exports = "<div *ngIf=\"userLogado\" class=\"wrapper\">\r\n  <header class=\"main-header\">\r\n    <!-- Logo -->\r\n    <a routerLink=\"/\" class=\"logo\">\r\n      <!-- mini logo for sidebar mini 50x50 pixels -->\r\n      <span class=\"logo-mini\"><b>Skills</b></span>\r\n      <!-- logo for regular state and mobile devices -->\r\n      <span class=\"logo-lg\">\r\n        <b>Job Skills</b>\r\n      </span>\r\n    </a>\r\n\r\n    <!-- Header Navbar -->\r\n    <nav class=\"navbar navbar-static-top justify-content-start\" role=\"navigation\">\r\n      <a href=\"#\" class=\"sidebar-toggle\" data-toggle=\"push-menu\" role=\"button\">\r\n        <span class=\"sr-only\">Toggle navigation</span>\r\n      </a>\r\n\r\n    </nav>\r\n  </header>\r\n\r\n  <!-- Coluna Esquerda do sidebar -  com Menu de Navegação -->\r\n  <aside class=\"main-sidebar\">\r\n    <!-- Sidebar Menu -->\r\n    <section class=\"sidebar\">\r\n      <ul class=\"sidebar-menu\" data-widget=\"tree\">\r\n        <li class=\"header\" style=\"text-align: center !important; padding: 15px 0 !important\">\r\n          <a class=\"nav-link \" routerLink=\"/\"> Dashboard </a>\r\n        </li>\r\n\r\n        <li class=\"nav-item\" routerLinkActive=\"active\">\r\n          <a class=\"nav-link \" routerLink=\"/skills\">\r\n            <svg class=\"mr-2\" xmlns=\"http://www.w3.org/2000/svg\" height=\"1em\"\r\n              viewBox=\"0 0 640 512\"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->\r\n              <path\r\n                d=\"M256 64H384v64H256V64zM240 0c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48h48v32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96v32H80c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48H240c26.5 0 48-21.5 48-48V368c0-26.5-21.5-48-48-48H192V288H448v32H400c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48H560c26.5 0 48-21.5 48-48V368c0-26.5-21.5-48-48-48H512V288h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H352V192h48c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H240zM96 448V384H224v64H96zm320-64H544v64H416V384z\" />\r\n            </svg>\r\n            Skills\r\n          </a>\r\n        </li>\r\n\r\n      </ul>\r\n\r\n    </section>\r\n\r\n    <section style=\"\r\n    position: absolute;\r\n    width: 100%;\r\n    bottom: 10px \">\r\n\r\n      <ul class=\"sidebar-menu\" data-widget=\"tree\">\r\n        <li class=\"nav-item\" routerLinkActive=\"active\">\r\n          <a   class=\"nav-link \" (click)=\"logout()\" style=\"cursor: pointer; color:white;\">\r\n            <svg class=\"mr-2\" xmlns=\"http://www.w3.org/2000/svg\" height=\"1em\"\r\n              viewBox=\"0 0 512 512\"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->\r\n              <path\r\n                d=\"M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z\" />\r\n            </svg>\r\n            Sair\r\n          </a>\r\n        </li>\r\n      </ul>\r\n\r\n    </section>\r\n\r\n  </aside>\r\n\r\n  <!-- Main content -->\r\n  <div class=\"content-wrapper\">\r\n    <section class=\"content container-fluid\">\r\n\r\n      <router-outlet></router-outlet>\r\n\r\n    </section>\r\n  </div>\r\n\r\n  <!-- Main Footer -->\r\n  <footer class=\"main-footer\">\r\n    <div class=\"pull-right hidden-xs\"> Desenvolvimento: <strong>Dowglas Maia</strong> </div>\r\n    <strong>&copy; 2023 | </strong> Todos os direitos reservados.\r\n  </footer>\r\n\r\n</div>\r\n\r\n\r\n<div *ngIf=\"!userLogado\">\r\n\r\n  <section class=\"content container-fluid\">\r\n\r\n    <router-outlet></router-outlet>\r\n\r\n  </section>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -253,16 +270,11 @@ var HomeComponent = /** @class */ (function () {
         this.getUserLogado();
     };
     HomeComponent.prototype.getUserLogado = function () {
-        var localUser = this.storage.getLocalUser();
-        var localManager = this.storage.getManager();
-        console.log(localUser);
-        console.log(localManager);
-        if (localUser !== null || localManager !== null) {
-            this.userLogado = true;
-        }
-        else {
-            this.router.navigateByUrl('login', { skipLocationChange: true });
-        }
+        this.storage.getLocalUser();
+        this.storage.getManager();
+        this.userLogado = this.storage.userLogado;
+        console.log("ESTAR LOGADO LOCAL", this.userLogado);
+        console.log("ESTAR LOGADO GERAL ", this.storage.userLogado);
     };
     HomeComponent.prototype.logout = function () {
         this.storage.setLocalUser(null);
@@ -304,6 +316,94 @@ var STORAGE_KEYS = {
 
 /***/ }),
 
+/***/ "./src/app/guard/auth-guard.service.ts":
+/*!*********************************************!*\
+  !*** ./src/app/guard/auth-guard.service.ts ***!
+  \*********************************************/
+/*! exports provided: AuthGuardService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuardService", function() { return AuthGuardService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _pages_login_services_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/login/services/storage.service */ "./src/app/pages/login/services/storage.service.ts");
+
+
+
+
+var AuthGuardService = /** @class */ (function () {
+    function AuthGuardService(storage, router) {
+        this.storage = storage;
+        this.router = router;
+    }
+    AuthGuardService.prototype.canActivate = function (route, state) {
+        if (this.storage.userLogado) {
+            return true;
+        }
+        else {
+            this.router.navigate(['login']);
+            return false;
+        }
+    };
+    AuthGuardService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_pages_login_services_storage_service__WEBPACK_IMPORTED_MODULE_3__["StorageService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+    ], AuthGuardService);
+    return AuthGuardService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/guard/login-guard.service.ts":
+/*!**********************************************!*\
+  !*** ./src/app/guard/login-guard.service.ts ***!
+  \**********************************************/
+/*! exports provided: LoginGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginGuard", function() { return LoginGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _pages_login_services_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/login/services/storage.service */ "./src/app/pages/login/services/storage.service.ts");
+
+
+
+
+var LoginGuard = /** @class */ (function () {
+    function LoginGuard(storage, router) {
+        this.storage = storage;
+        this.router = router;
+    }
+    LoginGuard.prototype.canActivate = function (route, state) {
+        if (this.storage.userLogado) {
+            this.router.navigate(['dashboard']);
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    LoginGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_pages_login_services_storage_service__WEBPACK_IMPORTED_MODULE_3__["StorageService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+    ], LoginGuard);
+    return LoginGuard;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/pages/login/services/storage.service.ts":
 /*!*********************************************************!*\
   !*** ./src/app/pages/login/services/storage.service.ts ***!
@@ -322,13 +422,15 @@ __webpack_require__.r(__webpack_exports__);
 
 var StorageService = /** @class */ (function () {
     function StorageService() {
+        this.userLogado = false;
     }
     StorageService.prototype.getLocalUser = function () {
         var user = sessionStorage.getItem(src_app_config_storage_keys_config__WEBPACK_IMPORTED_MODULE_2__["STORAGE_KEYS"].localUser);
         if (user == null)
             return null;
         else
-            return JSON.parse(user);
+            this.userLogado = true;
+        return JSON.parse(user);
     };
     StorageService.prototype.setLocalUser = function (obj) {
         if (obj == null) {
@@ -336,7 +438,7 @@ var StorageService = /** @class */ (function () {
         }
         else {
             sessionStorage.setItem(src_app_config_storage_keys_config__WEBPACK_IMPORTED_MODULE_2__["STORAGE_KEYS"].localUser, JSON.stringify(obj));
-            console.log(obj);
+            this.userLogado = true;
         }
     };
     StorageService.prototype.getManager = function () {
@@ -344,7 +446,8 @@ var StorageService = /** @class */ (function () {
         if (user == null)
             return null;
         else
-            return JSON.parse(user);
+            this.userLogado = true;
+        return JSON.parse(user);
     };
     StorageService.prototype.setManager = function (obj) {
         if (obj == null) {
@@ -352,6 +455,7 @@ var StorageService = /** @class */ (function () {
         }
         else {
             sessionStorage.setItem(src_app_config_storage_keys_config__WEBPACK_IMPORTED_MODULE_2__["STORAGE_KEYS"].localManager, JSON.stringify(obj));
+            this.userLogado = true;
             console.log(obj);
         }
     };

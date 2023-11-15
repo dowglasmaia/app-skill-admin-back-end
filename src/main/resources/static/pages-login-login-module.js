@@ -74,17 +74,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _model_login_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./model/login.model */ "./src/app/pages/login/model/login.model.ts");
 /* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/storage.service */ "./src/app/pages/login/services/storage.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
-/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
 
 
 
-
-toastr__WEBPACK_IMPORTED_MODULE_6___default.a.options = {
+toastr__WEBPACK_IMPORTED_MODULE_5___default.a.options = {
     "closeButton": false,
     "debug": false,
     "newestOnTop": false,
@@ -102,22 +100,13 @@ toastr__WEBPACK_IMPORTED_MODULE_6___default.a.options = {
     "hideMethod": "fadeOut"
 };
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(frmBuilder, storage, router) {
+    function LoginComponent(frmBuilder, storage) {
         this.frmBuilder = frmBuilder;
         this.storage = storage;
-        this.router = router;
     }
     LoginComponent.prototype.ngOnInit = function () {
-        this.getUserLogado();
         this.userLogin = new _model_login_model__WEBPACK_IMPORTED_MODULE_3__["Login"]();
         this.buildSkillForm();
-    };
-    LoginComponent.prototype.getUserLogado = function () {
-        var localUser = this.storage.getLocalUser();
-        var localManager = this.storage.getManager();
-        if (localUser !== null || localManager !== null) {
-            this.router.navigateByUrl('/', { skipLocationChange: true });
-        }
     };
     LoginComponent.prototype.buildSkillForm = function () {
         this.loginGroup = this.frmBuilder.group({
@@ -126,24 +115,17 @@ var LoginComponent = /** @class */ (function () {
         });
     };
     LoginComponent.prototype.login = function () {
-        var _this = this;
         var login = Object.assign(new _model_login_model__WEBPACK_IMPORTED_MODULE_3__["Login"](), this.loginGroup.value);
         if (login.password === "123" && login.user === "user") {
             this.storage.setLocalUser(login);
             location.reload();
-            setTimeout(function () {
-                _this.router.navigateByUrl('/', { skipLocationChange: true });
-            }, 1000);
         }
         else if (login.password === "123" && login.user === "manager") {
             this.storage.setManager(login);
             location.reload();
-            setTimeout(function () {
-                _this.router.navigateByUrl('/', { skipLocationChange: true });
-            }, 1000);
         }
         else {
-            toastr__WEBPACK_IMPORTED_MODULE_6___default.a.error('User ou Senha inválido(a)!');
+            toastr__WEBPACK_IMPORTED_MODULE_5___default.a.error('User ou Senha inválido(a)!');
         }
     };
     LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -153,8 +135,7 @@ var LoginComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/pages/login/login.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
-            _services_storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
+            _services_storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"]])
     ], LoginComponent);
     return LoginComponent;
 }());
