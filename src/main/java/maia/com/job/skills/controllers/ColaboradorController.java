@@ -2,7 +2,6 @@ package maia.com.job.skills.controllers;
 
 import maia.com.job.skills.domain.colaborador.dto.ColaboradorResponse;
 import maia.com.job.skills.domain.skill.dto.SkillRequestUpdate;
-import maia.com.job.skills.domain.skill.dto.SkillResponse;
 import maia.com.job.skills.services.ColaboradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +24,17 @@ public class ColaboradorController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/{numMatricula}/matricula")
+    public ResponseEntity<ColaboradorResponse> getByMatricula(
+            @PathVariable String numMatricula
+    ) {
+        var response = colaboradorService.getByMatricula(numMatricula);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping()
     public ResponseEntity<Set<ColaboradorResponse>> getAllByIdSkill(
-            @RequestParam(value = "" ,name = "skill") String skill
+            @RequestParam(value = "", name = "skill") String skill
     ) {
         var response = colaboradorService.getAll(skill);
         return ResponseEntity.ok(response);

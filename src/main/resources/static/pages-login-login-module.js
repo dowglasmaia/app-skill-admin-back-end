@@ -116,16 +116,42 @@ var LoginComponent = /** @class */ (function () {
     };
     LoginComponent.prototype.login = function () {
         var login = Object.assign(new _model_login_model__WEBPACK_IMPORTED_MODULE_3__["Login"](), this.loginGroup.value);
-        if (login.password === "123" && login.user === "user") {
+        if (this.getLoginUser(login.user) === login.user && login.password === "user2023") {
+            login.matricula = login.user;
             this.storage.setLocalUser(login);
             location.reload();
         }
-        else if (login.password === "123" && login.user === "manager") {
+        else if (login.password === "manager2023" && login.user === "manager") {
             this.storage.setManager(login);
             location.reload();
         }
         else {
             toastr__WEBPACK_IMPORTED_MODULE_5___default.a.error('User ou Senha inválido(a)!');
+        }
+    };
+    LoginComponent.prototype.getLoginUser = function (matricula) {
+        switch (matricula) {
+            case 'M01':
+                console.log("Matricula: " + matricula);
+                return matricula;
+            case 'M02':
+                console.log("Matricula: " + matricula);
+                return matricula;
+            case 'M03':
+                console.log("Matricula: " + matricula);
+                return matricula;
+            case 'M04':
+                console.log("Matricula: " + matricula);
+                return matricula;
+            case 'M05':
+                console.log("Matricula: " + matricula);
+                return matricula;
+            case 'M06':
+                console.log("Matricula: " + matricula);
+                return matricula;
+            default:
+                console.log("Matricula não encontrada para o Colaborador");
+                break;
         }
     };
     LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([

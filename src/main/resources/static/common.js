@@ -138,6 +138,10 @@ var ColaboradorService = /** @class */ (function () {
         return this.http.get(url)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.jsonDataToColaborador));
     };
+    ColaboradorService.prototype.getByMatricula = function (matricula) {
+        return this.http.get(this.apiPath + "/" + matricula + "/matricula")
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.jsonDataToColaborador));
+    };
     ColaboradorService.prototype.update = function (id, skills) {
         var url = this.apiPath + "/" + id + "/skills";
         return this.http.put(url, skills)

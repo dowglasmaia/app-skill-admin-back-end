@@ -45,6 +45,12 @@ public class ColaboradorServiceImpl implements ColaboradorService {
     }
 
     @Override
+    public ColaboradorResponse getByMatricula(String matricula) {
+        var entity = repository.findByMatricula(matricula);
+        return to(entity);
+    }
+
+    @Override
     public ColaboradorResponse addSkillInColaborador(List<SkillRequestUpdate> skills, Long idColaborador) {
 
         var colaboradorEntity = repository.findById(idColaborador).get();

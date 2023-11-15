@@ -60,9 +60,9 @@ toastr__WEBPACK_IMPORTED_MODULE_8___default.a.options = {
     "preventDuplicates": false,
     "onclick": null,
     "showDuration": "300",
-    "hideDuration": "1000",
+    "hideDuration": "800",
     "timeOut": "3000",
-    "extendedTimeOut": "1000",
+    "extendedTimeOut": "900",
     "showEasing": "swing",
     "hideEasing": "linear",
     "showMethod": "fadeIn",
@@ -82,9 +82,9 @@ var UserComponent = /** @class */ (function () {
         this.skills = [];
     }
     UserComponent.prototype.ngOnInit = function () {
-        this.getById();
-        this.getAllSkill();
         this.getUserLogado();
+        this.getByMatricula();
+        this.getAllSkill();
     };
     UserComponent.prototype.getById = function () {
         var _this = this;
@@ -93,24 +93,17 @@ var UserComponent = /** @class */ (function () {
             _this.colaboradorSkills = colaborador.skills;
         }, function (error) { return alert('Ocorreu um error no servidor, tente mais tarde!'); });
     };
+    UserComponent.prototype.getByMatricula = function () {
+        var _this = this;
+        this.route.paramMap.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (params) { return _this.colaboradorService.getByMatricula(params.get("matricula")); })).subscribe(function (colaborador) {
+            _this.colaborador = colaborador;
+            _this.colaboradorSkills = colaborador.skills;
+        }, function (error) { return alert('Ocorreu um error no servidor, tente mais tarde!'); });
+    };
     UserComponent.prototype.getAllSkill = function () {
         var _this = this;
         this.skillsService.getAll()
             .subscribe(function (skills) { return _this.skills = skills; });
-    };
-    UserComponent.prototype.addSkill = function (newSkill) {
-        var existeValor = this.colaboradorSkills.some(function (item) { return item.name === newSkill.name; });
-        if (!existeValor)
-            this.colaboradorSkills.push(newSkill);
-    };
-    UserComponent.prototype.update = function () {
-        var _this = this;
-        console.log(this.colaborador);
-        this.colaboradorService.update(this.colaborador.id, this.colaborador.skills)
-            .subscribe(function (colaborador) {
-            _this.colaborador = colaborador;
-            toastr__WEBPACK_IMPORTED_MODULE_8___default.a.success('Skill adicionada com sucesso!');
-        }, function (error) { return toastr__WEBPACK_IMPORTED_MODULE_8___default.a.error('Ocorreu um error ao tentar adicionar uma nova Skill!'); });
     };
     UserComponent.prototype.getUserLogado = function () {
         var localUser = this.storage.getLocalUser();
@@ -121,6 +114,24 @@ var UserComponent = /** @class */ (function () {
         else if (localUser === null && localManager !== null) {
             this.managerLogado = true;
         }
+    };
+    UserComponent.prototype.addSkill = function (newSkill) {
+        var existeValor = this.colaboradorSkills.some(function (item) { return item.name === newSkill.name; });
+        console.log(newSkill);
+        if (!existeValor)
+            this.colaboradorSkills.push(newSkill);
+    };
+    UserComponent.prototype.update = function () {
+        var _this = this;
+        console.log(this.colaborador);
+        this.colaboradorService.update(this.colaborador.id, this.colaborador.skills)
+            .subscribe(function (colaborador) {
+            _this.colaborador = colaborador;
+            toastr__WEBPACK_IMPORTED_MODULE_8___default.a.success('Skill adicionada com sucesso!');
+            setTimeout(function () {
+                location.reload();
+            }, 1300);
+        }, function (error) { return toastr__WEBPACK_IMPORTED_MODULE_8___default.a.error('Ocorreu um error ao tentar adicionar uma nova Skill!'); });
     };
     UserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -161,7 +172,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var routes = [
     { path: '', component: _profile_user_component__WEBPACK_IMPORTED_MODULE_3__["UserComponent"] },
-    { path: ':id', component: _profile_user_component__WEBPACK_IMPORTED_MODULE_3__["UserComponent"] }
+    { path: ':matricula', component: _profile_user_component__WEBPACK_IMPORTED_MODULE_3__["UserComponent"] }
 ];
 var UserRoutingModule = /** @class */ (function () {
     function UserRoutingModule() {
