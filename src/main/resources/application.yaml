@@ -1,0 +1,22 @@
+server:
+  port: 8005
+spring:
+  application:
+    name: skills-api
+  datasource:
+    url: jdbc:postgresql://postgre:5432/skill
+    username: maia
+    password: maiapw
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
