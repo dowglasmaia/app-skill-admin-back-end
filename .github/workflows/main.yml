@@ -34,7 +34,25 @@ jobs:
     needs: [CI]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout do repositorio
+        uses: actions/checkout@v4.1.7
       - name: Conectar com Kubernetes
-        run: echo "Configuração do kubconfig"
-      - name: Executar o deploy
-        run: echo "kubectl aplly"
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_SECRET }}
+      - name: Configuração do Kubeconfig
+        run: aws eks update-kubeconfig --name NOME DO CUSTER --region us-east-1
+      
+      - name: Atualização do Manifesto ## teste - depois remover e usar  secret no eks
+        shell: bash
+        run: |
+          sed -i "s/{{AWS_ACCESS_KEY}}/${{ secrets.AWS_ACCESS_KEY }}/g ./ks8/deployment.yaml
+          sed -i "s/{{AWS_ACCESS_SECRET}}/${{ secrets.AWS_ACCESS_SECRET }}/g ./ks8/deployment.yaml
+      - name: Deploy to Kubernetes cluster
+        uses: Azure/k8s-deploy@v4.9
+        with:    
+          manifests: |
+               ./ks8/deployment.yaml
+          images: dowglasmaia/admin-skill-api:${{github.run_number}}
