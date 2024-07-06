@@ -30,7 +30,7 @@ jobs:
         
       - name: Publicando a imagem no Docker Hub
         run: echo "Docker push"
-  CD:
+  CD: 
     needs: [CI]
     runs-on: ubuntu-latest
     steps:
@@ -48,8 +48,8 @@ jobs:
       - name: Atualização do Manifesto ## teste - depois remover e usar  secret no eks
         shell: bash
         run: |
-          sed -i "s|{{AWS_ACCESS_KEY}}/${{ secrets.AWS_ACCESS_KEY }}|g" k8s/deployment.yaml
-          sed -i "s|{{AWS_ACCESS_SECRET}}/${{ secrets.AWS_ACCESS_SECRET }}|g" ks8/deployment.yaml
+          sed -i `s/{{AWS_ACCESS_KEY}}/${{ secrets.AWS_ACCESS_KEY }}/g` ./k8s/deployment.yaml
+          sed -i `s/{{AWS_ACCESS_SECRET}}/${{ secrets.AWS_ACCESS_SECRET }}/g` ./k8s/deployment.yaml
       - name: Deploy to Kubernetes cluster
         uses: Azure/k8s-deploy@v4.9
         with:    
