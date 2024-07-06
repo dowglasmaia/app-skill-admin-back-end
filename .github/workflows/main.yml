@@ -39,11 +39,11 @@ jobs:
       - name: Conectar com Kubernetes
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: us-east-1
+          aws-region: us-east-2
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_SECRET }}
       - name: Configuração do Kubeconfig
-        run: aws eks update-kubeconfig --name maia-dev-api --region us-east-1
+        run: aws eks update-kubeconfig --name maia-dev-api --region us-east-2
       
       - name: Atualização do Manifesto ## teste - depois remover e usar  secret no eks
         shell: bash
