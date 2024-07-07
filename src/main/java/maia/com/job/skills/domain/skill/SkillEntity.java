@@ -1,5 +1,6 @@
 package maia.com.job.skills.domain.skill;
 
+
 import lombok.*;
 import maia.com.job.skills.domain.colaborador.ColaboradorEntity;
 
