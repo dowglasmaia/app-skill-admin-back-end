@@ -57,5 +57,5 @@ jobs:
         uses: Azure/k8s-deploy@v4.9
         with:    
           manifests: |
-               k8s/deployment.yaml
+               k8s/
           images: dowglasmaia/admin-skill-api:${{ github.run_number }}
