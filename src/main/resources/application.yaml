@@ -33,6 +33,11 @@ management:
   endpoint:
     health:
       show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+    ratelimiters:
+      enabled: true
   metrics:
     enable:
       jvm: true
@@ -40,7 +45,7 @@ management:
       prometheus:
         enabled: true
     tags:
-      application: address-api
+      application: 'skills-api'
     distribution:
       slo:
         http: '5ms,10ms,25ms,50ms,100ms,200ms,300ms,400ms,500ms,1s,2s'
@@ -48,6 +53,22 @@ management:
         http:
           server:
             requests: true
+
+#Circuit Breaker
+resilience4j:
+  circuitbreaker:
+    instances:
+      skills-api:
+        slidingWindowType: COUNT_BASED
+        registerHealthIndicator: true
+        slidingWindowSize: 6
+        failureRateThreshold: 50
+        slowCallDurationThreshold: 100
+        slowCallRateThreshold: 80
+        waitDurationInOpenState: 60s
+        permittedNumberOfCallsInHalfOpenState: 3
+        enableAutomaticTransitionFromOpenToClosedState: true
+        transitionFromOpenToClosedStateOnSuccessfulCall: true
 
 info:
   app:
@@ -57,3 +78,8 @@ info:
     encoding: '@project.build.sourceEncoding@'
     java:
       version: '@java.version@'
+
+
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
