@@ -55,7 +55,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: dowglasmaia/admin-skill-api:v4
+          image: dowglasmaia/admin-skill-api
           ports:
             - containerPort: 8005
           env:
