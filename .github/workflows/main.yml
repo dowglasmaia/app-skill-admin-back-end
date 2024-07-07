@@ -45,7 +45,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_SECRET }}
 
       - name: Configuração do Kubeconfig
-        run: aws eks update-kubeconfig --name maia-dev-api --region us-east-1
+        run: aws eks update-kubeconfig --name devops-api --region us-east-1
 
       - name: Atualização do Manifesto ## teste - depois remover e usar secret no eks
         shell: bash
