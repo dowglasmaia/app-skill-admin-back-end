@@ -45,7 +45,7 @@ management:
       prometheus:
         enabled: true
     tags:
-      application: 'skills-api'
+      application: ${spring.application.name}
     distribution:
       slo:
         http: '5ms,10ms,25ms,50ms,100ms,200ms,300ms,400ms,500ms,1s,2s'
